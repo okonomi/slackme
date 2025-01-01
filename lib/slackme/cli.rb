@@ -5,9 +5,9 @@ module Slackme
     def self.run(argv)
       case argv[0]
       when "login"
-        puts "Logging in..."
+        Slackme::Commands::Login.new.call
       when "user"
-        puts "Showing user..."
+        Slackme::Commands::User.new.call
       else
         puts "Usage: slackme [login|user]"
       end
