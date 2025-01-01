@@ -2,4 +2,6 @@
 
 # frozen_string_literal: true
 
-puts 'slackme'
+require 'slackme'
+
+Slackme::CLI.run(ARGV)
