@@ -45,7 +45,7 @@ module Slackme
         authorize_url = URI("https://slack.com/oauth/v2/authorize")
         authorize_url.query = URI.encode_www_form({
                                                     user_scope: "users.profile:read",
-                                                    redirect_uri: "https://github.com/okonomi/slackme",
+                                                    redirect_uri: "https://okonomi.github.io/slackme/callback.html",
                                                     client_id: client_id
                                                   })
 
