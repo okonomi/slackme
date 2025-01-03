@@ -2,12 +2,20 @@ PATH
   remote: .
   specs:
     slackme (0.1.0)
+      launchy
 
 GEM
   remote: https://rubygems.org/
   specs:
+    addressable (2.8.7)
+      public_suffix (>= 2.0.2, < 7.0)
     ast (2.4.2)
+    childprocess (5.1.0)
+      logger (~> 1.5)
     date (3.4.1)
+    debug (1.10.0)
+      irb (~> 1.10)
+      reline (>= 0.3.8)
     diff-lcs (1.5.1)
     io-console (0.8.0)
     irb (1.14.3)
@@ -15,6 +23,10 @@ GEM
       reline (>= 0.4.2)
     json (2.9.1)
     language_server-protocol (3.17.0.3)
+    launchy (3.0.1)
+      addressable (~> 2.8)
+      childprocess (~> 5.0)
+    logger (1.6.4)
     parallel (1.26.3)
     parser (3.3.6.0)
       ast (~> 2.4.1)
@@ -22,6 +34,7 @@ GEM
     psych (5.2.2)
       date
       stringio
+    public_suffix (6.0.1)
     racc (1.8.1)
     rainbow (3.1.1)
     rake (13.2.1)
@@ -66,6 +79,7 @@ PLATFORMS
   ruby
 
 DEPENDENCIES
+  debug
   irb
   rake
   rspec
