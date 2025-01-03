@@ -4,6 +4,7 @@ require "json"
 require "launchy"
 require "net/http"
 require "uri"
+require "xdg"
 
 module Slackme
   module Commands
@@ -37,7 +38,18 @@ module Slackme
                                          client_id: client_id,
                                          client_secret: client_secret
                                        })
-        pp JSON.parse(response.body)
+        token_info = JSON.parse(response.body)
+
+        puts "Save token_info to a file..."
+        xdg_config = XDG::Config.new
+        config_dir = xdg_config.home.join("slackme")
+        config_dir.mkpath
+        File.write(
+          config_dir.join("token.json"),
+          JSON.pretty_generate(
+            token_info.slice("app_id", "authed_user", "team")
+          )
+        )
       end
     end
   end
