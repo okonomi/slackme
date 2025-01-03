@@ -9,11 +9,17 @@ module Slackme
       def call
         puts "Logging in..."
 
+        print "Enter your client ID: "
+        client_id = $stdin.gets.chomp
+
+        print "Enter your client secret: "
+        client_secret = $stdin.gets.chomp
+
         authorize_url = URI("https://slack.com/oauth/v2/authorize")
         authorize_url.query = URI.encode_www_form({
                                                     user_scope: "users.profile:read",
                                                     redirect_uri: "https://github.com/okonomi/slackme",
-                                                    client_id: "7885128322.8237280166819"
+                                                    client_id: client_id
                                                   })
 
         Launchy.open(authorize_url.to_s)
