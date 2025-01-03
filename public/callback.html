@@ -1,0 +1,26 @@
+<html>
+<head>
+  <title>Slackme</title>
+  <link rel="stylesheet" href="https://cdn.simplecss.org/simple.min.css">
+  <script type="module">
+    document.addEventListener('DOMContentLoaded', () => {
+      const query = new URLSearchParams(window.location.search);
+      const state = query.get('state');
+      const code = query.get('code');
+
+      document.getElementById('state').textContent = state;
+      document.getElementById('code').textContent = code;
+    });
+  </script>
+</head>
+<body>
+  <h1>Slackme</h1>
+
+  <dl>
+    <dt>State</dt>
+    <dd id="state"></dd>
+    <dt>Code</dt>
+    <dd id="code"></dd>
+  </dl>
+</body>
+</html>
