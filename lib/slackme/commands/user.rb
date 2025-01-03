@@ -10,7 +10,8 @@ module Slackme
         puts "Showing user..."
 
         token_info = load_token_info
-        pp token_info
+        user = get_current_user(token_info)
+        pp user["profile"]
       end
 
       private
@@ -22,6 +23,18 @@ module Slackme
         raise "No token found. Please login first" unless token_info
 
         token_info
+      end
+
+      def get_current_user(token_info)
+        uri = URI("https://slack.com/api/users.profile.get")
+
+        http = Net::HTTP.new(uri.host, uri.port)
+        http.use_ssl = uri.scheme == "https"
+
+        headers = { authorization: "Bearer #{token_info.dig("authed_user", "access_token")}" }
+        response = http.get(uri.path, headers)
+
+        JSON.parse(response.body)
       end
     end
   end
