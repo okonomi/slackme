@@ -13,7 +13,7 @@ module Slackme
 
         token_info = load_token_info
         user = get_current_user(token_info)
-        pp user["profile"]
+        pp user
       end
 
       private
@@ -35,7 +35,8 @@ module Slackme
           headers: { authorization: "Bearer #{token}" }
         )
 
-        JSON.parse(response.body)
+        parsed = JSON.parse(response.body)
+        parsed["profile"]
       end
     end
   end
