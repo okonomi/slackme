@@ -3,6 +3,8 @@
 require "json"
 require "xdg"
 
+require_relative "../http"
+
 module Slackme
   module Commands
     class User
@@ -26,13 +28,12 @@ module Slackme
       end
 
       def get_current_user(token_info)
-        uri = URI("https://slack.com/api/users.profile.get")
+        token = token_info.dig("authed_user", "access_token")
 
-        http = Net::HTTP.new(uri.host, uri.port)
-        http.use_ssl = uri.scheme == "https"
-
-        headers = { authorization: "Bearer #{token_info.dig("authed_user", "access_token")}" }
-        response = http.get(uri.path, headers)
+        response = Slackme::HTTP.get(
+          "https://slack.com/api/users.profile.get",
+          headers: { authorization: "Bearer #{token}" }
+        )
 
         JSON.parse(response.body)
       end

@@ -6,6 +6,8 @@ require "net/http"
 require "uri"
 require "xdg"
 
+require_relative "../http"
+
 module Slackme
   module Commands
     class Login
@@ -51,12 +53,11 @@ module Slackme
       end
 
       def exchange_code_for_access_token(code, client_id, client_secret)
-        token_url = URI("https://slack.com/api/oauth.v2.access")
-        response = Net::HTTP.post_form(token_url, {
-                                         code: code,
-                                         client_id: client_id,
-                                         client_secret: client_secret
-                                       })
+        response = Slackme::HTTP.post("https://slack.com/api/oauth.v2.access", body: {
+                                        code: code,
+                                        client_id: client_id,
+                                        client_secret: client_secret
+                                      })
         JSON.parse(response.body)
       end
 
